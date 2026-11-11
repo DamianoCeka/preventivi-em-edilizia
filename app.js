@@ -7,31 +7,86 @@
     ditta: "E.M. EDILIZIA",
     sottotitolo: "Coperture  ·  Isolamenti  ·  Lattonerie",
     referente: "Gallushi Rexhep",
+    indirizzo: "", piva: "", telefono: "", email: "",
     prossimoNumero: 1,
   };
 
   // {q} viene sostituito con la quantità inserita
   const CATALOGO_BASE = [
+    // Lattonerie
     { titolo: "Rivestimento del muretto", tipo: "m",
       testo: "Completamento del rivestimento in lattoneria nelle parti mancanti del muretto, per una lunghezza complessiva di circa {q} metri lineari." },
     { titolo: "Sostituzione lattoneria danneggiata", tipo: "m",
       testo: "Rimozione della lattoneria danneggiata e fornitura e posa in opera della nuova lattoneria, per una lunghezza complessiva di circa {q} metri lineari." },
+    { titolo: "Lattoneria in alluminio", tipo: "m",
+      testo: "Fornitura e posa in opera di lattoneria in alluminio, colore antracite, comprensiva di sigillatura, per circa {q} metri lineari." },
     { titolo: "Copertina in alluminio", tipo: "corpo",
       testo: "Fornitura e posa in opera di copertina in alluminio, colore bianco/grigio, con fissaggio meccanico." },
     { titolo: "Sfiati mancanti", tipo: "corpo",
       testo: "Fornitura e posa in opera degli sfiati mancanti in copertura, comprensiva di posizionamento e fissaggio." },
     { titolo: "Scossaline dei lucernari", tipo: "corpo",
       testo: "Realizzazione e posa di scossaline in lattoneria attorno ai lucernari interessati da infiltrazioni d’acqua, a protezione dei raccordi con la copertura." },
-    { titolo: "Grondaie", tipo: "m",
-      testo: "Fornitura e posa in opera di grondaie in lamiera, complete di staffe, testate e accessori di fissaggio, per circa {q} metri lineari." },
+    { titolo: "Rimozione e riposa delle scossaline", tipo: "corpo",
+      testo: "Rimozione delle scossaline esistenti e loro riposizionamento a copertura ultimata." },
+    { titolo: "Sostituzione grondaia", tipo: "m",
+      testo: "Rimozione della grondaia esistente e fornitura e posa in opera della nuova grondaia, completa di staffe e accessori, per circa {q} metri lineari." },
     { titolo: "Pluviali", tipo: "m",
       testo: "Fornitura e posa in opera di pluviali in lamiera, completi di collari e raccordi, per circa {q} metri lineari." },
     { titolo: "Pulizia grondaie e pluviali", tipo: "corpo",
       testo: "Pulizia di grondaie e pluviali con rimozione di foglie e detriti e verifica del corretto deflusso dell’acqua." },
-    { titolo: "Guaina impermeabilizzante", tipo: "mq",
-      testo: "Fornitura e posa in opera di guaina bituminosa impermeabilizzante, per una superficie di circa {q} m²." },
+    // Impermeabilizzazione
+    { titolo: "Applicazione primer", tipo: "mq",
+      testo: "Applicazione di primer per l’aggrappaggio della nuova impermeabilizzazione, su una superficie di circa {q} m²." },
+    { titolo: "Rimozione guaina danneggiata e scarichi", tipo: "corpo",
+      testo: "Rimozione degli scarichi esistenti e della guaina danneggiata o ritirata, solo dove necessario." },
+    { titolo: "Nuova guaina 4 mm saldata a fiamma", tipo: "mq",
+      testo: "Fornitura e posa in opera di nuova guaina liscia da 4 mm, flessibilità a freddo −20 °C, saldata a fiamma e certificata, su una superficie di circa {q} m²." },
+    { titolo: "Doppio strato di guaina (solo manodopera)", tipo: "mq",
+      testo: "Posa in opera di due strati di guaina saldata a fiamma, compresa l’applicazione del primer, su una superficie di circa {q} m². Solo manodopera." },
+    { titolo: "Sostituzione scarichi", tipo: "corpo",
+      testo: "Sostituzione degli scarichi della copertura con nuovi elementi." },
+    { titolo: "Nuovo scarico da 100 mm", tipo: "pz",
+      testo: "Realizzazione del foro e fornitura e posa in opera di nuovo scarico da 100 mm, completo di pluviale." },
+    { titolo: "Due mani di vernice all’alluminio", tipo: "corpo",
+      testo: "Applicazione di due mani di vernice protettiva all’alluminio sulla nuova guaina, da eseguire entro due mesi dalla posa." },
     { titolo: "Isolamento della copertura", tipo: "mq",
       testo: "Fornitura e posa in opera di pannelli isolanti in copertura, per una superficie di circa {q} m²." },
+    // Terrazze e opere varie
+    { titolo: "Demolizione del massetto", tipo: "mq",
+      testo: "Demolizione del massetto esistente, compresi carico, trasporto e smaltimento delle macerie, per circa {q} m²." },
+    { titolo: "Massetto delle pendenze", tipo: "mq",
+      testo: "Realizzazione di nuovo massetto con le pendenze necessarie al deflusso dell’acqua, per circa {q} m²." },
+    { titolo: "Pavimento in gres per esterni", tipo: "mq",
+      testo: "Fornitura e posa in opera di pavimento in gres porcellanato per esterni, colore a scelta del cliente, per circa {q} m²." },
+    { titolo: "Smontaggio e rimontaggio ringhiera", tipo: "corpo",
+      testo: "Smontaggio della ringhiera esistente e suo rimontaggio a lavori ultimati." },
+    // Cantiere
+    { titolo: "Montaggio e smontaggio castello", tipo: "corpo",
+      testo: "Montaggio e smontaggio del castello di salita per l’accesso in sicurezza alla copertura." },
+    { titolo: "Noleggio piattaforma elevatrice", tipo: "corpo",
+      testo: "Noleggio di piattaforma elevatrice per l’esecuzione dei lavori in quota." },
+  ];
+
+  // Lavori tipo: aggiungono in un colpo oggetto e voci
+  const MODELLI = [
+    { nome: "Rifacimento copertura con guaina", oggetto: "Rifacimento dell’impermeabilizzazione della copertura.",
+      opz: { sviluppo: false, piattaforma: false },
+      voci: ["Montaggio e smontaggio castello", "Applicazione primer", "Rimozione guaina danneggiata e scarichi",
+             "Rimozione e riposa delle scossaline", "Nuova guaina 4 mm saldata a fiamma", "Sostituzione scarichi",
+             "Due mani di vernice all’alluminio"] },
+    { nome: "Doppia guaina, solo manodopera", oggetto: "Posa in opera di doppio strato di guaina saldata a fiamma.",
+      opz: { sviluppo: false, piattaforma: false },
+      voci: ["Doppio strato di guaina (solo manodopera)"] },
+    { nome: "Lattonerie in copertura", oggetto: "Lavori di completamento e sistemazione delle lattonerie in copertura.",
+      opz: { sviluppo: true, piattaforma: true },
+      voci: ["Rivestimento del muretto", "Copertina in alluminio", "Sfiati mancanti", "Scossaline dei lucernari"] },
+    { nome: "Sostituzione lattoneria danneggiata", oggetto: "Sostituzione della lattoneria danneggiata.",
+      opz: { sviluppo: true, piattaforma: true },
+      voci: ["Sostituzione lattoneria danneggiata"] },
+    { nome: "Sistemazione terrazza con infiltrazioni", oggetto: "Lavori di ripristino e impermeabilizzazione della terrazza.",
+      opz: { sviluppo: false, piattaforma: false },
+      voci: ["Noleggio piattaforma elevatrice", "Demolizione del massetto", "Applicazione primer", "Nuovo scarico da 100 mm",
+             "Nuova guaina 4 mm saldata a fiamma", "Massetto delle pendenze", "Pavimento in gres per esterni"] },
   ];
 
   const CLIENTI_BASE = [];
@@ -39,8 +94,8 @@
   const OGGETTI = [
     "Lavori di completamento e sistemazione delle lattonerie in copertura.",
     "Sostituzione della lattoneria danneggiata.",
-    "Lavori di impermeabilizzazione della copertura.",
-    "Fornitura e posa di grondaie e pluviali.",
+    "Rifacimento dell’impermeabilizzazione della copertura.",
+    "Lavori di ripristino e impermeabilizzazione della terrazza.",
   ];
 
   // ---------- Archivio locale ----------
@@ -50,6 +105,12 @@
 
   let impostazioni = Object.assign({}, IMPOSTAZIONI_BASE, load("imp", {}));
   let catalogo = load("catalogo", null) || CATALOGO_BASE.map((c) => ({ id: uid(), ...c }));
+  if (load("catv", 0) < 2) {
+    const vecchie = ["Grondaie", "Guaina impermeabilizzante"], nuove = CATALOGO_BASE.map((c) => c.titolo);
+    const mie = catalogo.filter((c) => !nuove.includes(c.titolo) && !vecchie.includes(c.titolo));
+    catalogo = CATALOGO_BASE.map((c) => ({ id: uid(), ...c })).concat(mie);
+    save("catalogo", catalogo); save("catv", 2);
+  }
   let clienti = load("clienti", null) || CLIENTI_BASE.slice();
   let archivio = load("archivio", []);
   let prev = load("bozza", null) || nuovoPreventivo();
@@ -75,7 +136,18 @@
   // ---------- Utilità ----------
   const $ = (s, el = document) => el.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const num = (v) => { const n = parseFloat(String(v ?? "").replace(/\./g, "").replace(",", ".")); return isNaN(n) ? 0 : n; };
+  const num = (v) => {
+    let t = String(v ?? "").replace(/[^\d.,-]/g, "");
+    if (t.includes(",")) t = t.replace(/\./g, "").replace(",", ".");
+    else if (/^-?\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, "");
+    const n = parseFloat(t); return isNaN(n) ? 0 : n;
+  };
+  const dec = (n) => (Math.round(n * 100) / 100).toFixed(2).replace(".", ",").replace(/,00$/, "");
+  const UNITA = { m: "m", mq: "m²", pz: "pz" };
+  function creaVoce(c) {
+    const v = { titolo: c.titolo, tipo: c.tipo, qta: "", prezzo: "", tpl: c.testo, importo: "", descManuale: false };
+    v.descrizione = testoVoce(v); return v;
+  }
   const numQ = (v) => String(v ?? "").replace(".", ",");
   const euro = (n) => PDFPrev.euro(n);
 
@@ -154,6 +226,7 @@
       </div>
 
       <h2>Lavori</h2>
+      <button class="btn block" id="modello" style="margin-bottom:10px">📋 Parti da un lavoro tipo</button>
       <div id="voci">${p.voci.map(vocehtml).join("") || `<div class="card empty" style="padding:20px">Nessuna voce. Aggiungi i lavori qui sotto.</div>`}</div>
       <button class="btn primary block" id="add-voce" style="margin-top:10px">＋ Aggiungi lavoro</button>
 
@@ -202,6 +275,7 @@
     bindVoci();
     $("#scegli-cliente").onclick = sceltaCliente;
     $("#add-voce").onclick = sceltaVoce;
+    $("#modello").onclick = sceltaModello;
     $("#pdf").onclick = () => creaPdf(true);
     $("#anteprima").onclick = () => creaPdf(false);
     $("#svuota").onclick = () => {
@@ -222,7 +296,9 @@
         <button class="btn small ghost" data-del>✕</button></div>
       <label>Quantità</label>
       <div class="qta-tipo">${tipi.map(([k, l]) => `<button data-tipo="${k}" class="${v.tipo === k ? "on" : ""}">${l}</button>`).join("")}</div>
-      ${v.tipo !== "corpo" ? `<input data-f="qta" inputmode="decimal" placeholder="Quantità" value="${esc(v.qta)}" style="margin-top:6px">` : ""}
+      ${v.tipo !== "corpo" ? `<div class="row" style="margin-top:6px">
+        <input data-f="qta" inputmode="decimal" placeholder="Quantità" value="${esc(v.qta)}">
+        <input data-f="prezzo" inputmode="decimal" placeholder="€ al ${UNITA[v.tipo]} (facolt.)" value="${esc(v.prezzo)}"></div>` : ""}
       <label>Descrizione</label>
       <textarea data-f="descrizione" rows="3">${esc(v.descrizione)}</textarea>
       <label>Importo voce € (facoltativo)</label>
@@ -241,10 +317,15 @@
         const f = el.dataset.f; v[f] = el.value;
         if (f === "descrizione") v.descManuale = true;
         if (f === "qta" && !v.descManuale) { v.descrizione = testoVoce(v); card.querySelector('[data-f="descrizione"]').value = v.descrizione; }
-        if (f === "importo") {
+        if ((f === "qta" || f === "prezzo") && num(v.prezzo) > 0) {
+          // prezzo unitario: l'importo della voce si calcola da solo
+          v.importo = num(v.qta) > 0 ? dec(num(v.qta) * num(v.prezzo)) : "";
+          card.querySelector('[data-f="importo"]').value = v.importo;
+        }
+        if (f === "importo" || f === "qta" || f === "prezzo") {
           const tv = $("#tot-view");
           // passaggio da totale manuale a somma voci (o viceversa): ridisegno conservando il focus
-          if (!!tv !== haImporti()) { persist(); renderEditor(); const el2 = document.querySelector(`.voce[data-i="${i}"] [data-f="importo"]`); el2 && (el2.focus(), el2.setSelectionRange(99, 99)); return; }
+          if (!!tv !== haImporti()) { persist(); renderEditor(); const el2 = document.querySelector(`.voce[data-i="${i}"] [data-f="${f}"]`); el2 && (el2.focus(), el2.setSelectionRange(99, 99)); return; }
           if (tv) tv.textContent = euro(sommaVoci());
         }
         persist();
@@ -276,13 +357,25 @@
         };
         box.querySelectorAll("[data-c]").forEach((b) => b.onclick = () => {
           const c = b.dataset.c === "libera" ? { titolo: "Nuova voce", tipo: "corpo", testo: "" } : catalogo[+b.dataset.c];
-          const v = { titolo: c.titolo, tipo: c.tipo, qta: "", tpl: c.testo, importo: "", descManuale: false };
-          v.descrizione = testoVoce(v);
-          prev.voci.push(v); persist(); closeSheet(); renderEditor();
+          prev.voci.push(creaVoce(c)); persist(); closeSheet(); renderEditor();
           const cards = document.querySelectorAll(".voce"); const last = cards[cards.length - 1];
           if (last) { last.scrollIntoView({ behavior: "smooth", block: "center" }); const q = last.querySelector('[data-f="qta"]'); q && setTimeout(() => q.focus(), 300); }
         });
       });
+  }
+
+  function sceltaModello() {
+    openSheet("Lavori tipo", MODELLI.map((m, i) => `<button class="pick" data-m="${i}"><b>${esc(m.nome)}</b>
+      <small>${m.voci.length} ${m.voci.length === 1 ? "voce" : "voci"}: ${esc(m.voci.join(", ").slice(0, 110))}…</small></button>`).join("") +
+      `<div class="hint">Aggiunge le voci già scritte: poi metti solo quantità e prezzi, e togli quelle che non servono.</div>`,
+      (box) => box.querySelectorAll("[data-m]").forEach((b) => b.onclick = () => {
+        const m = MODELLI[+b.dataset.m];
+        if (prev.voci.length && !confirm("Aggiungo queste voci a quelle che ci sono già?")) return;
+        if (!prev.oggetto.trim()) prev.oggetto = m.oggetto;
+        Object.assign(prev.opz, m.opz);
+        m.voci.forEach((t) => { const c = catalogo.find((x) => x.titolo === t) || CATALOGO_BASE.find((x) => x.titolo === t); c && prev.voci.push(creaVoce(c)); });
+        persist(); closeSheet(); renderEditor(); toast("Voci aggiunte: metti quantità e prezzi");
+      }));
   }
 
   function sceltaCliente() {
@@ -321,7 +414,8 @@
       numero: p.numero, data: isoToIt(p.data), riferimento: p.riferimento.trim(),
       cliente: { nome: p.cliente.nome.trim(), indirizzo: p.cliente.indirizzo.trim(), cf: p.cliente.cf.trim() },
       oggetto: p.oggetto.trim(),
-      voci: p.voci.map((v) => ({ titolo: v.titolo, tipo: v.tipo, qta: v.qta, descrizione: v.descrizione })),
+      voci: p.voci.map((v) => ({ titolo: v.titolo, tipo: v.tipo, qta: v.qta, descrizione: v.descrizione,
+        prezzo: v.tipo !== "corpo" && num(v.prezzo) > 0 ? `${euro(num(v.prezzo))}/${UNITA[v.tipo]}` : "" })),
       note: note(p), totale: p.voci.some((v) => num(v.importo) > 0) ? p.voci.reduce((a, v) => a + num(v.importo), 0) : num(p.totale),
     };
   }
@@ -423,6 +517,10 @@
         <label>Nome ditta</label><input id="s-ditta" value="${esc(s.ditta)}">
         <label>Sottotitolo</label><input id="s-sotto" value="${esc(s.sottotitolo)}">
         <label>Referente</label><input id="s-ref" value="${esc(s.referente)}">
+        <label>Indirizzo</label><input id="s-ind" placeholder="Via, CAP, città" value="${esc(s.indirizzo)}">
+        <div class="row"><div><label>P. IVA</label><input id="s-piva" value="${esc(s.piva)}"></div>
+        <div><label>Telefono</label><input id="s-tel" inputmode="tel" value="${esc(s.telefono)}"></div></div>
+        <label>Email</label><input id="s-mail" inputmode="email" value="${esc(s.email)}">
         <label>Prossimo numero preventivo</label><input id="s-num" inputmode="numeric" value="${esc(s.prossimoNumero)}">
       </div>
 
@@ -445,10 +543,11 @@
         <div class="list-actions"><button class="btn small dark" id="backup">⬇ Salva copia</button>
         <label class="btn small" style="margin:0;color:inherit">⬆ Ripristina<input type="file" id="restore" accept="application/json" hidden></label></div>
       </div>
-      <div class="hint" style="text-align:center;margin:24px 0 6px">Preventivi E.M. Edilizia · v1.0</div>`;
+      <div class="hint" style="text-align:center;margin:24px 0 6px">Preventivi E.M. Edilizia · v1.1</div>`;
 
     const b = (id, f) => { $("#" + id).oninput = (e) => { f(e.target.value); persist(); }; };
     b("s-ditta", (x) => s.ditta = x); b("s-sotto", (x) => s.sottotitolo = x); b("s-ref", (x) => s.referente = x);
+    b("s-ind", (x) => s.indirizzo = x); b("s-piva", (x) => s.piva = x); b("s-tel", (x) => s.telefono = x); b("s-mail", (x) => s.email = x);
     b("s-num", (x) => { const n = parseInt(x, 10); if (!isNaN(n)) { s.prossimoNumero = n; if (!prev.id) prev.numero = n; } });
 
     v.querySelectorAll("[data-ed]").forEach((x) => x.onclick = () => modificaCat(+x.dataset.ed));

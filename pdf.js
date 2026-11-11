@@ -54,10 +54,19 @@
     color(DARK); font("B", 17); txt(`PREVENTIVO N. ${q.numero}`, R, 52, { align: "right" });
     font("R", 8.5); color(GREY); txt(`Data: ${q.data}`, R, 70, { align: "right" });
     if (q.riferimento) { color(ACC); font("B", 8); txt(q.riferimento, R, 83, { align: "right" }); }
-    hline(100);
+    const contatti = [s.indirizzo, s.piva && "P. IVA " + s.piva, s.telefono && "Tel. " + s.telefono, s.email]
+      .map((x) => (x || "").trim()).filter(Boolean).join("  ·  ");
+    let top = 100;
+    if (contatti) {
+      font("R", 7.8); color(GREY);
+      const righe = doc.splitTextToSize(contatti, R - L);
+      righe.forEach((r, i) => txt(r, L, 96 + i * 11));
+      top = 96 + righe.length * 11 + 2;
+    }
+    hline(top);
 
     // Cliente
-    let y = 124;
+    let y = top + 24;
     font("B", 7.5); color(GREY); txt("SPETT.LE", L, y);
     font("B", 10.5); color(DARK); txt(q.cliente.nome.toUpperCase(), L, y + 16);
     font("R", 8.6);
@@ -91,6 +100,7 @@
       y += 18;
       font("B", 8.8); color(DARK); txt(v.titolo, L + 12, y);
       font("R", 8.6); txt(qtaLabel(v), qx, y);
+      if (v.prezzo) { font("R", 7.5); color(GREY); txt(v.prezzo, qx, y + 12); color(DARK); }
       y = para(v.descrizione, L + 12, y + 13, qx - L - 30);
       y -= 6;
       hline(y);
@@ -110,7 +120,7 @@
     });
 
     // Totale
-    y = ensure(y + 10, 46 + 110);
+    y = ensure(y + 10, 46 + 84);
     fill(BAND); doc.rect(L, y - 6, R - L, 46, "F");
     fill(ACC); doc.rect(L, y - 6, 3, 46, "F");
     color(DARK); font("B", 10); txt("Totale preventivo, IVA esclusa", L + 12, y + 13);
