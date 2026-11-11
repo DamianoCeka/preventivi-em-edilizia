@@ -12,60 +12,70 @@
   };
 
   // {q} viene sostituito con la quantità inserita
+  // [categoria, titolo, unità, testo] — {q} = quantità
   const CATALOGO_BASE = [
-    // Lattonerie
-    { titolo: "Rivestimento del muretto", tipo: "m",
-      testo: "Completamento del rivestimento in lattoneria nelle parti mancanti del muretto, per una lunghezza complessiva di circa {q} metri lineari." },
-    { titolo: "Sostituzione lattoneria danneggiata", tipo: "m",
-      testo: "Rimozione della lattoneria danneggiata e fornitura e posa in opera della nuova lattoneria, per una lunghezza complessiva di circa {q} metri lineari." },
-    { titolo: "Lattoneria in alluminio", tipo: "m",
-      testo: "Fornitura e posa in opera di lattoneria in alluminio, colore antracite, comprensiva di sigillatura, per circa {q} metri lineari." },
-    { titolo: "Copertina in alluminio", tipo: "corpo",
-      testo: "Fornitura e posa in opera di copertina in alluminio, colore bianco/grigio, con fissaggio meccanico." },
-    { titolo: "Sfiati mancanti", tipo: "corpo",
-      testo: "Fornitura e posa in opera degli sfiati mancanti in copertura, comprensiva di posizionamento e fissaggio." },
-    { titolo: "Scossaline dei lucernari", tipo: "corpo",
-      testo: "Realizzazione e posa di scossaline in lattoneria attorno ai lucernari interessati da infiltrazioni d’acqua, a protezione dei raccordi con la copertura." },
-    { titolo: "Rimozione e riposa delle scossaline", tipo: "corpo",
-      testo: "Rimozione delle scossaline esistenti e loro riposizionamento a copertura ultimata." },
-    { titolo: "Sostituzione grondaia", tipo: "m",
-      testo: "Rimozione della grondaia esistente e fornitura e posa in opera della nuova grondaia, completa di staffe e accessori, per circa {q} metri lineari." },
-    { titolo: "Pluviali", tipo: "m",
-      testo: "Fornitura e posa in opera di pluviali in lamiera, completi di collari e raccordi, per circa {q} metri lineari." },
-    { titolo: "Pulizia grondaie e pluviali", tipo: "corpo",
-      testo: "Pulizia di grondaie e pluviali con rimozione di foglie e detriti e verifica del corretto deflusso dell’acqua." },
-    // Impermeabilizzazione
-    { titolo: "Applicazione primer", tipo: "mq",
-      testo: "Applicazione di primer per l’aggrappaggio della nuova impermeabilizzazione, su una superficie di circa {q} m²." },
-    { titolo: "Rimozione guaina danneggiata e scarichi", tipo: "corpo",
-      testo: "Rimozione degli scarichi esistenti e della guaina danneggiata o ritirata, solo dove necessario." },
-    { titolo: "Nuova guaina 4 mm saldata a fiamma", tipo: "mq",
-      testo: "Fornitura e posa in opera di nuova guaina liscia da 4 mm, flessibilità a freddo −20 °C, saldata a fiamma e certificata, su una superficie di circa {q} m²." },
-    { titolo: "Doppio strato di guaina (solo manodopera)", tipo: "mq",
-      testo: "Posa in opera di due strati di guaina saldata a fiamma, compresa l’applicazione del primer, su una superficie di circa {q} m². Solo manodopera." },
-    { titolo: "Sostituzione scarichi", tipo: "corpo",
-      testo: "Sostituzione degli scarichi della copertura con nuovi elementi." },
-    { titolo: "Nuovo scarico da 100 mm", tipo: "pz",
-      testo: "Realizzazione del foro e fornitura e posa in opera di nuovo scarico da 100 mm, completo di pluviale." },
-    { titolo: "Due mani di vernice all’alluminio", tipo: "corpo",
-      testo: "Applicazione di due mani di vernice protettiva all’alluminio sulla nuova guaina, da eseguire entro due mesi dalla posa." },
-    { titolo: "Isolamento della copertura", tipo: "mq",
-      testo: "Fornitura e posa in opera di pannelli isolanti in copertura, per una superficie di circa {q} m²." },
-    // Terrazze e opere varie
-    { titolo: "Demolizione del massetto", tipo: "mq",
-      testo: "Demolizione del massetto esistente, compresi carico, trasporto e smaltimento delle macerie, per circa {q} m²." },
-    { titolo: "Massetto delle pendenze", tipo: "mq",
-      testo: "Realizzazione di nuovo massetto con le pendenze necessarie al deflusso dell’acqua, per circa {q} m²." },
-    { titolo: "Pavimento in gres per esterni", tipo: "mq",
-      testo: "Fornitura e posa in opera di pavimento in gres porcellanato per esterni, colore a scelta del cliente, per circa {q} m²." },
-    { titolo: "Smontaggio e rimontaggio ringhiera", tipo: "corpo",
-      testo: "Smontaggio della ringhiera esistente e suo rimontaggio a lavori ultimati." },
-    // Cantiere
-    { titolo: "Montaggio e smontaggio castello", tipo: "corpo",
-      testo: "Montaggio e smontaggio del castello di salita per l’accesso in sicurezza alla copertura." },
-    { titolo: "Noleggio piattaforma elevatrice", tipo: "corpo",
-      testo: "Noleggio di piattaforma elevatrice per l’esecuzione dei lavori in quota." },
-  ];
+    ["Lattonerie", "Rivestimento del muretto", "m", "Completamento del rivestimento in lattoneria nelle parti mancanti del muretto, per una lunghezza complessiva di circa {q} metri lineari."],
+    ["Lattonerie", "Sostituzione lattoneria danneggiata", "m", "Rimozione della lattoneria danneggiata e fornitura e posa in opera della nuova lattoneria, per una lunghezza complessiva di circa {q} metri lineari."],
+    ["Lattonerie", "Lattoneria in alluminio", "m", "Fornitura e posa in opera di lattoneria in alluminio, colore antracite, comprensiva di sigillatura, per circa {q} metri lineari."],
+    ["Lattonerie", "Copertina in alluminio", "corpo", "Fornitura e posa in opera di copertina in alluminio, colore bianco/grigio, con fissaggio meccanico."],
+    ["Lattonerie", "Scossaline dei lucernari", "corpo", "Realizzazione e posa di scossaline in lattoneria attorno ai lucernari interessati da infiltrazioni d’acqua, a protezione dei raccordi con la copertura."],
+    ["Lattonerie", "Rimozione e riposa delle scossaline", "corpo", "Rimozione delle scossaline esistenti e loro riposizionamento a copertura ultimata."],
+    ["Lattonerie", "Nuove scossaline", "m", "Fornitura e posa in opera di nuove scossaline in lamiera, complete di fissaggi e sigillatura, per circa {q} metri lineari."],
+    ["Lattonerie", "Converse e raccordi a muro", "m", "Fornitura e posa in opera di converse e raccordi a muro in lamiera, completi di sigillatura, per circa {q} metri lineari."],
+    ["Lattonerie", "Rivestimento del camino", "pz", "Rivestimento in lattoneria del camino, completo di raccordo con la copertura e sigillatura."],
+    ["Lattonerie", "Sostituzione grondaia", "m", "Rimozione della grondaia esistente e fornitura e posa in opera della nuova grondaia, completa di staffe e accessori, per circa {q} metri lineari."],
+    ["Lattonerie", "Nuova grondaia", "m", "Fornitura e posa in opera di grondaia in lamiera, completa di staffe, testate e accessori, per circa {q} metri lineari."],
+    ["Lattonerie", "Pluviali", "m", "Fornitura e posa in opera di pluviali in lamiera, completi di collari e raccordi, per circa {q} metri lineari."],
+    ["Lattonerie", "Pulizia grondaie e pluviali", "corpo", "Pulizia di grondaie e pluviali con rimozione di foglie e detriti e verifica del corretto deflusso dell’acqua."],
+    ["Lattonerie", "Paraneve", "m", "Fornitura e posa in opera di paraneve sulla copertura, per circa {q} metri lineari."],
+
+    ["Guaine e impermeabilizzazioni", "Applicazione primer", "mq", "Applicazione di primer per l’aggrappaggio della nuova impermeabilizzazione, su una superficie di circa {q} m²."],
+    ["Guaine e impermeabilizzazioni", "Rimozione guaina danneggiata e scarichi", "corpo", "Rimozione degli scarichi esistenti e della guaina danneggiata o ritirata, solo dove necessario."],
+    ["Guaine e impermeabilizzazioni", "Rimozione completa della vecchia guaina", "mq", "Rimozione completa della guaina esistente, compresi carico, trasporto e smaltimento, per circa {q} m²."],
+    ["Guaine e impermeabilizzazioni", "Nuova guaina 4 mm saldata a fiamma", "mq", "Fornitura e posa in opera di nuova guaina liscia da 4 mm, flessibilità a freddo −20 °C, saldata a fiamma e certificata, su una superficie di circa {q} m²."],
+    ["Guaine e impermeabilizzazioni", "Guaina ardesiata", "mq", "Fornitura e posa in opera di guaina ardesiata saldata a fiamma come strato di finitura, su una superficie di circa {q} m²."],
+    ["Guaine e impermeabilizzazioni", "Doppio strato di guaina (solo manodopera)", "mq", "Posa in opera di due strati di guaina saldata a fiamma, compresa l’applicazione del primer, su una superficie di circa {q} m². Solo manodopera."],
+    ["Guaine e impermeabilizzazioni", "Doppio strato di guaina (fornitura e posa)", "mq", "Fornitura e posa in opera di doppio strato di guaina saldata a fiamma, con sormonti sfalsati e risvolti perimetrali, su una superficie di circa {q} m²."],
+    ["Guaine e impermeabilizzazioni", "Riparazione localizzata della guaina", "corpo", "Riparazione localizzata della guaina nei punti danneggiati, con rappezzi saldati a fiamma e sigillatura."],
+    ["Guaine e impermeabilizzazioni", "Sostituzione scarichi", "corpo", "Sostituzione degli scarichi della copertura con nuovi elementi."],
+    ["Guaine e impermeabilizzazioni", "Nuovo scarico da 100 mm", "pz", "Realizzazione del foro e fornitura e posa in opera di nuovo scarico da 100 mm, completo di pluviale."],
+    ["Guaine e impermeabilizzazioni", "Sfiati mancanti", "corpo", "Fornitura e posa in opera degli sfiati mancanti in copertura, comprensiva di posizionamento e fissaggio."],
+    ["Guaine e impermeabilizzazioni", "Due mani di vernice all’alluminio", "corpo", "Applicazione di due mani di vernice protettiva all’alluminio sulla nuova guaina, da eseguire entro due mesi dalla posa."],
+    ["Guaine e impermeabilizzazioni", "Impermeabilizzazione di balcone o terrazza", "mq", "Impermeabilizzazione del balcone o della terrazza, compresi risvolti e raccordi con gli scarichi, per circa {q} m²."],
+
+    ["Tetti e coperture", "Rimozione del manto di copertura", "mq", "Rimozione del manto di copertura esistente, compresi calo a terra, carico e smaltimento, per circa {q} m²."],
+    ["Tetti e coperture", "Ripasso del manto in tegole o coppi", "mq", "Ripasso del manto di copertura con sostituzione degli elementi rotti e sistemazione di quelli spostati, per circa {q} m²."],
+    ["Tetti e coperture", "Nuovo manto in tegole o coppi", "mq", "Fornitura e posa in opera di nuovo manto di copertura in tegole o coppi, compresi pezzi speciali, per circa {q} m²."],
+    ["Tetti e coperture", "Pannelli di copertura", "mq", "Fornitura e posa in opera di pannelli di copertura, compresi fissaggi e accessori, per circa {q} m²."],
+    ["Tetti e coperture", "Lamiera grecata", "mq", "Fornitura e posa in opera di copertura in lamiera grecata, compresi fissaggi e accessori, per circa {q} m²."],
+    ["Tetti e coperture", "Listellatura", "mq", "Fornitura e posa in opera di listelli in legno per la ventilazione e il fissaggio del manto, per circa {q} m²."],
+    ["Tetti e coperture", "Telo traspirante sottotegola", "mq", "Fornitura e posa in opera di telo traspirante sottotegola, con sormonti nastrati, per circa {q} m²."],
+    ["Tetti e coperture", "Sistemazione del colmo", "m", "Sistemazione del colmo con fissaggio degli elementi e ripristino della tenuta, per circa {q} metri lineari."],
+    ["Tetti e coperture", "Sostituzione lucernario", "pz", "Rimozione del lucernario esistente e fornitura e posa in opera del nuovo, completo di raccordi e scossaline."],
+    ["Tetti e coperture", "Ricerca e riparazione infiltrazione", "corpo", "Ricerca del punto di infiltrazione e riparazione con ripristino della tenuta all’acqua."],
+    ["Tetti e coperture", "Isolamento della copertura", "mq", "Fornitura e posa in opera di pannelli isolanti in copertura, per una superficie di circa {q} m²."],
+    ["Tetti e coperture", "Barriera al vapore", "mq", "Fornitura e posa in opera di barriera al vapore sotto lo strato isolante, per circa {q} m²."],
+
+    ["Terrazze e opere edili", "Demolizione del massetto", "mq", "Demolizione del massetto esistente, compresi carico, trasporto e smaltimento delle macerie, per circa {q} m²."],
+    ["Terrazze e opere edili", "Massetto delle pendenze", "mq", "Realizzazione di nuovo massetto con le pendenze necessarie al deflusso dell’acqua, per circa {q} m²."],
+    ["Terrazze e opere edili", "Pavimento in gres per esterni", "mq", "Fornitura e posa in opera di pavimento in gres porcellanato per esterni, colore a scelta del cliente, per circa {q} m²."],
+    ["Terrazze e opere edili", "Demolizione di pavimento e rivestimenti", "mq", "Demolizione di pavimento e rivestimenti esistenti, compresi carico, trasporto e smaltimento delle macerie, per circa {q} m²."],
+    ["Terrazze e opere edili", "Posa di pavimento", "mq", "Posa in opera di pavimento, compresi colla e stuccatura delle fughe, per circa {q} m²."],
+    ["Terrazze e opere edili", "Intonaco", "mq", "Realizzazione di intonaco su pareti o soffitti, finito a regola d’arte, per circa {q} m²."],
+    ["Terrazze e opere edili", "Ripristino sottobalcone", "corpo", "Ripristino del sottobalcone con rimozione delle parti ammalorate, rasatura e tinteggiatura."],
+    ["Terrazze e opere edili", "Idropulitura", "mq", "Lavaggio delle superfici con idropulitrice, per circa {q} m²."],
+    ["Terrazze e opere edili", "Riparazione di crepe e fori", "corpo", "Riparazione di crepe e fori dove necessario, con stuccatura e rasatura."],
+    ["Terrazze e opere edili", "Tinteggiatura", "mq", "Applicazione di fissativo e di due mani di pittura, per circa {q} m²."],
+    ["Terrazze e opere edili", "Smontaggio e rimontaggio ringhiera", "corpo", "Smontaggio della ringhiera esistente e suo rimontaggio a lavori ultimati."],
+    ["Terrazze e opere edili", "Sollevamento travi in legno", "corpo", "Sollevamento e messa in sicurezza delle travi in legno mediante cric."],
+
+    ["Cantiere", "Montaggio e smontaggio castello", "corpo", "Montaggio e smontaggio del castello di salita per l’accesso in sicurezza alla copertura."],
+    ["Cantiere", "Montaggio e smontaggio ponteggio", "corpo", "Montaggio e smontaggio del ponteggio a norma, per tutta la durata dei lavori."],
+    ["Cantiere", "Noleggio piattaforma elevatrice", "corpo", "Noleggio di piattaforma elevatrice per l’esecuzione dei lavori in quota."],
+    ["Cantiere", "Smaltimento materiali di risulta", "corpo", "Carico, trasporto e smaltimento in discarica autorizzata dei materiali di risulta."],
+    ["Cantiere", "Pulizia finale del cantiere", "corpo", "Pulizia finale dell’area di lavoro a lavori ultimati."],
+  ].map(([cat, titolo, tipo, testo]) => ({ cat, titolo, tipo, testo }));
+  const CATEGORIE = [...new Set(CATALOGO_BASE.map((c) => c.cat)), "Altro"];
 
   // Lavori tipo: aggiungono in un colpo oggetto e voci
   const MODELLI = [
@@ -105,11 +115,16 @@
 
   let impostazioni = Object.assign({}, IMPOSTAZIONI_BASE, load("imp", {}));
   let catalogo = load("catalogo", null) || CATALOGO_BASE.map((c) => ({ id: uid(), ...c }));
-  if (load("catv", 0) < 2) {
-    const vecchie = ["Grondaie", "Guaina impermeabilizzante"], nuove = CATALOGO_BASE.map((c) => c.titolo);
-    const mie = catalogo.filter((c) => !nuove.includes(c.titolo) && !vecchie.includes(c.titolo));
-    catalogo = CATALOGO_BASE.map((c) => ({ id: uid(), ...c })).concat(mie);
-    save("catalogo", catalogo); save("catv", 2);
+  if (load("catv", 0) < 3) {
+    // aggiorno le voci pronte senza toccare quelle aggiunte o modificate a mano
+    const vecchie = ["Grondaie", "Guaina impermeabilizzante"];
+    catalogo = catalogo.filter((c) => !vecchie.includes(c.titolo));
+    CATALOGO_BASE.forEach((c) => {
+      const mia = catalogo.find((x) => x.titolo === c.titolo);
+      if (mia) mia.cat = mia.cat || c.cat; else catalogo.push({ id: uid(), ...c });
+    });
+    catalogo.forEach((c) => c.cat = c.cat || "Altro");
+    save("catalogo", catalogo); save("catv", 3);
   }
   let clienti = load("clienti", null) || CLIENTI_BASE.slice();
   let archivio = load("archivio", []);
@@ -347,13 +362,16 @@
   function sceltaVoce() {
     openSheet("Scegli il lavoro", `
       <input class="search" id="cerca" placeholder="Cerca…">
-      <div id="lista">${catalogo.map((c, i) => `<button class="pick" data-c="${i}"><b>${esc(c.titolo)}</b>
-        <small>${esc(c.testo.replace("{q}", "…").slice(0, 90))}${c.testo.length > 90 ? "…" : ""}</small></button>`).join("")}
-      <button class="pick" data-c="libera"><b>✏️ Voce libera</b><small>Scrivi tu titolo e descrizione</small></button></div>`,
+      <div id="lista"><button class="pick" data-c="libera"><b>✏️ Voce libera</b><small>Scrivi tu titolo e descrizione</small></button>
+      ${CATEGORIE.map((k) => { const voci = catalogo.map((c, i) => [c, i]).filter(([c]) => (c.cat || "Altro") === k);
+        return voci.length ? `<div class="grp"><h2>${esc(k)}</h2>${voci.map(([c, i]) => `<button class="pick" data-c="${i}"><b>${esc(c.titolo)}</b>
+        <small>${esc(c.testo.replace("{q}", "…").slice(0, 90))}${c.testo.length > 90 ? "…" : ""}</small></button>`).join("")}</div>` : ""; }).join("")}
+      <button class="pick" data-c="libera" style="display:none"><b>✏️ Voce libera</b><small>Scrivi tu titolo e descrizione</small></button></div>`,
       (box) => {
         $("#cerca", box).oninput = (e) => {
           const t = e.target.value.toLowerCase();
           box.querySelectorAll(".pick").forEach((p) => p.style.display = p.textContent.toLowerCase().includes(t) ? "" : "none");
+          box.querySelectorAll(".grp").forEach((g) => g.style.display = [...g.querySelectorAll(".pick")].some((p) => p.style.display !== "none") ? "" : "none");
         };
         box.querySelectorAll("[data-c]").forEach((b) => b.onclick = () => {
           const c = b.dataset.c === "libera" ? { titolo: "Nuova voce", tipo: "corpo", testo: "" } : catalogo[+b.dataset.c];
@@ -527,7 +545,7 @@
       <h2>Lavori pronti (${catalogo.length})</h2>
       <div class="hint" style="margin:0 4px 8px">Scrivi {q} nel testo dove va la quantità: si compila da solo.</div>
       ${catalogo.map((c, i) => `<div class="card"><div class="list-item"><div><b>${esc(c.titolo)}</b>
-        <div class="meta">${{ m: "Metri", mq: "m²", pz: "Pezzi", corpo: "A corpo" }[c.tipo]}</div></div>
+        <div class="meta">${esc(c.cat || "Altro")} · ${{ m: "Metri", mq: "m²", pz: "Pezzi", corpo: "A corpo" }[c.tipo]}</div></div>
         <div style="display:flex;gap:6px"><button class="btn small" data-ed="${i}">Modifica</button>
         <button class="btn small ghost" data-rm="${i}">✕</button></div></div></div>`).join("")}
       <button class="btn primary block" id="add-cat" style="margin-top:10px">＋ Nuovo lavoro pronto</button>
@@ -543,7 +561,7 @@
         <div class="list-actions"><button class="btn small dark" id="backup">⬇ Salva copia</button>
         <label class="btn small" style="margin:0;color:inherit">⬆ Ripristina<input type="file" id="restore" accept="application/json" hidden></label></div>
       </div>
-      <div class="hint" style="text-align:center;margin:24px 0 6px">Preventivi E.M. Edilizia · v1.1</div>`;
+      <div class="hint" style="text-align:center;margin:24px 0 6px">Preventivi E.M. Edilizia · v1.2</div>`;
 
     const b = (id, f) => { $("#" + id).oninput = (e) => { f(e.target.value); persist(); }; };
     b("s-ditta", (x) => s.ditta = x); b("s-sotto", (x) => s.sottotitolo = x); b("s-ref", (x) => s.referente = x);
@@ -575,15 +593,17 @@
   }
 
   function modificaCat(i) {
-    const c = i >= 0 ? catalogo[i] : { titolo: "", tipo: "m", testo: "" };
+    const c = i >= 0 ? catalogo[i] : { titolo: "", tipo: "m", testo: "", cat: "Altro" };
     openSheet(i >= 0 ? "Modifica lavoro" : "Nuovo lavoro", `
       <label>Titolo</label><input id="m-tit" value="${esc(c.titolo)}">
+      <label>Categoria</label>
+      <select id="m-cat">${CATEGORIE.map((k) => `<option ${(c.cat || "Altro") === k ? "selected" : ""}>${esc(k)}</option>`).join("")}</select>
       <label>Quantità di solito in</label>
       <select id="m-tipo">${[["m", "Metri"], ["mq", "m²"], ["pz", "Pezzi"], ["corpo", "A corpo"]].map(([k, l]) => `<option value="${k}" ${c.tipo === k ? "selected" : ""}>${l}</option>`).join("")}</select>
       <label>Descrizione (usa {q} per la quantità)</label><textarea id="m-txt" rows="5">${esc(c.testo)}</textarea>
       <button class="btn primary block" id="m-ok" style="margin-top:14px">Salva</button>`,
       (box) => $("#m-ok", box).onclick = () => {
-        const n = { id: c.id || uid(), titolo: $("#m-tit").value.trim(), tipo: $("#m-tipo").value, testo: $("#m-txt").value.trim() };
+        const n = { id: c.id || uid(), cat: $("#m-cat").value, titolo: $("#m-tit").value.trim(), tipo: $("#m-tipo").value, testo: $("#m-txt").value.trim() };
         if (!n.titolo) { alert("Scrivi almeno il titolo."); return; }
         if (i >= 0) catalogo[i] = n; else catalogo.push(n);
         persist(); closeSheet(); renderImpostazioni();

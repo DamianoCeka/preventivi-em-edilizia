@@ -1,5 +1,5 @@
 // Cache per usare l'app anche senza rete (in cantiere).
-const CACHE = "preventivi-v2";
+const CACHE = "preventivi-v3";
 const FILES = ["./", "index.html", "style.css", "app.js", "pdf.js", "vendor/jspdf.umd.min.js",
   "fonts/DejaVuSans.ttf", "fonts/DejaVuSans-Bold.ttf", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES))); self.skipWaiting(); });
